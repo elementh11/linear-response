@@ -2,8 +2,8 @@
 % uniform !!!FRACTIONAL!!! k-mesh generator
 clearvars;
 
-nk1 = 3;
-nk2 = 1;
+nk1 = 100;
+nk2 = 100;
 nk3 = 1;
 
 

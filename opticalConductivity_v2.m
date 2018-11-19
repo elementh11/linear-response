@@ -1,4 +1,4 @@
-function data1 = opticalConductivity_v2(file)
+function [data1, data2] = opticalConductivity_v2(file)
 % ---- optical conductivity tensor with Kubo formula and iterative Green's function method
 % --- !!! restricted to -xy and -yx components for now !!!
 
@@ -12,7 +12,7 @@ while(~feof(in))
         value = eval(line(regexp(line,'=')+1:end));
         variable = genvarname(line(1:regexp(line,'=')-1));
         eval([variable '= value;']);
-        data1.params.(variable) = value;
+        %data1.params.(variable) = value;
     end
 end
 
@@ -22,7 +22,7 @@ b1 = 2 * pi * cross(a2,a3) / vol;
 b2 = 2 * pi * cross(a3,a1) / vol;
 b3 = 2 * pi * cross(a1,a2) / vol;
 
-kb = 1.38e-23;  qelec = 1.6e-19; kt = kb / qelec * temp;
+kb = 1.38e-23;  qelec = 1.6e-19; kt = kb / qelec * abs_temp;
 de = (energylist(end) - energylist(1)) / (length(energylist) -1);
 
 load(hfile);
@@ -143,7 +143,7 @@ for kc = 1:nk
     end
     
     %%%%%%%%%%%%%%%% progress indicator
-    if mod(kc, 50)==0
+    if mod(kc, prog_step)==0
         prog = fopen('progress.txt','a');
         fprintf(prog,'calculating for k=%d/%d \n',kc,nk);
         fclose(prog);
@@ -153,9 +153,10 @@ end
 for region = {'b','s','ds'}
     data1.sigma_xy.(region{1}) = s_xy.(region{1});
     data1.sigma_yx.(region{1}) = s_yx.(region{1});
-    data1.spin_sigma_xy.(region{1}) = spin_xy.(region{1});
-    data1.spin_sigma_yx.(region{1}) = spin_yx.(region{1});
+    data2.spin_sigma_xy.(region{1}) = spin_xy.(region{1});
+    data2.spin_sigma_yx.(region{1}) = spin_yx.(region{1});
 end
 save(outputfile1,'data1','-v7.3');
+save(outputfile2,'data2','-v7.3');
 
 
