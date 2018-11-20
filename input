@@ -1,7 +1,8 @@
 ne = 1000;
 ef = 12.8320;
-energylist = ef + linspace(-2, 2, ne);
-omegalist = linspace(0, 4, 100);
+energylist = ef + linspace(-4, 4, ne);
+omegamax = 2;
+w_to_e_ratio = 2;
 prog_step = 100;
 eta = 1e-16;
 abs_temp = 0;
