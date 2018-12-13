@@ -13,8 +13,8 @@ for m = 1:niter
     alpha1 = alpha0 /(eps - e0) * alpha0;
     beta1 = beta0 /(eps - e0) * beta0;
     e1 = e0 + alpha0 /(eps - e0) * beta0 + beta0 /(eps - e0) * alpha0;
-    e1s = e0s + alpha0 /(eps - e0) * beta0;
-    e1ds = e0ds + beta0 /(eps - e0) * alpha0;
+    e1s = e0s + alpha1;
+    e1ds = e0ds + beta1;
     
     conv = max(max(abs(alpha1)));
     conv2 = max(max(abs(beta1)));
