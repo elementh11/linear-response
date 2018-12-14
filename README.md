@@ -6,3 +6,5 @@ Calculation of the optical conductivity tensor with Kubo formula and the iterati
 version -v3 - everything for {xy} and {yx} components (including spin Hall)
 
 starting with getHamiltonianForG - split into smaller pieces for each calculation type
+
+TO DO: separate into 2D and 3D calculations
